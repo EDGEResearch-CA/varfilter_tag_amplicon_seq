@@ -141,10 +141,9 @@ call_tag_amp_mutations <- function(
 }
 
 # Calling function ----
-## Input bianca_data_2025
 call_tag_amp_mutations(
-    input_filename = here::here("input", "DA-1987_variant_support_final.xlsx"),
-    output_prefix = "bianca",
+    input_filename = here::here("example_input.xlsx"),
+    output_prefix = "myself",
     output_folder = here::here("output"),
     vaf_cutoff = 2
 )
