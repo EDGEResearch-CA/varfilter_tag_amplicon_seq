@@ -13,6 +13,7 @@ Application of thresholds to determine the confidence of each variant being a re
 
 It considers formalin-induced artifacts, which can falsely look like mutations.
 
+It assumes specific columns names - edit if needed
 
 # Summary of custom rules
 Minimum of 2 supporting amplicons
