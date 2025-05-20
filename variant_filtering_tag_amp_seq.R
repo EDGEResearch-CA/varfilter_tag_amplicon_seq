@@ -18,20 +18,25 @@ library(here)          # helps create platform-independent file paths
 library(readxl)        # used to read Excel files (.xlsx)
 library(writexl)       # used to write Excel files (.xlsx)
 
-## Define a function to assess whether a mutation is real ----
+## Define the function 'assess_mutation' to assess whether a mutation is real ----
 ## Includes a custom system of rules
+## It assumes a specific data frame format as input - change as needed
+## Data input generated from a tagged amplicon sequencing strategy 
+## It uses 3 amplicons covering the same variant for redundancy/confidence
+
 assess_mutation <- function(single_row, vaf_cutoff = 2) { #single_row represents a single variant for one single case (1 row)
   
   # Extract values from each row of the data frame - correspondent to one single variant for one case
-  vaf <- as.numeric(single_row[["VAF"]]) #as.numeric to ensure value is treated as a number 
-  # assumes that VAF is already converted to % (if not, add * 100)
+  vaf <- as.numeric(single_row[["VAF"]]) 
+  ## as.numeric to ensure value is treated as a number 
+  ## assumes that VAF is already converted to % (if not, add * 100)
   
   n_support_amplicons <- as.numeric(single_row[["SupportingAmplicons"]])  
-  # how many amplicons support the mutation (3 maximum possible by current strategy)
+  # number of amplicons support the mutation (3 maximum possible by current strategy)
   
   # Extract read counts from the 3 amplicon columns 
-  amplicon_reads_vector <- c(                       # creates a vector containg the read os support from the 3 amplicons
-    as.numeric(single_row[["AmpliconProbeHits_1"]]),
+  amplicon_reads_vector <- c(                       # creates a vector containing the read of support from the 3 amplicons
+    as.numeric(single_row[["AmpliconProbeHits_1"]]), # assumes these names of the columns - change if needed
     as.numeric(single_row[["AmpliconProbeHits_2"]]),
     as.numeric(single_row[["AmpliconProbeHits_3"]]) 
   )
@@ -104,7 +109,7 @@ call_tag_amp_mutations <- function(
 
   ## Start files and folders ----
   ## Create input and output folders if they don't exist ----
-  dir.create(here::here(output_folder), showWarnings = FALSE) #suppresses “folder already exists” messages
+  dir.create(here::here(output_folder), showWarnings = FALSE) # suppresses “folder already exists” messages
   
   ## Read the Excel input file containing pre-processed variant data ----
   variant_support_data <- read_excel( # it reads and store as an R data frame
@@ -143,7 +148,7 @@ call_tag_amp_mutations <- function(
 # Calling function ----
 call_tag_amp_mutations(
     input_filename = here::here("example_input.xlsx"),
-    output_prefix = "myself",
+    output_prefix = "my_name",
     output_folder = here::here("output"),
-    vaf_cutoff = 2
+    vaf_cutoff = 2 # VAF threshold can be changed. 2 is the deafult of the function.
 )
