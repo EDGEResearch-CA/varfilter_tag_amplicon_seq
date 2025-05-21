@@ -15,6 +15,8 @@ It considers formalin-induced artifacts, which can falsely look like mutations.
 
 It assumes specific columns names - edit if needed
 
+It contains two example data frames in the input folder
+
 # Summary of custom rules
 Minimum of 2 supporting amplicons
 
