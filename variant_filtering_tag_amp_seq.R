@@ -1,7 +1,8 @@
 # Script Summary ----
 ## Function call_tag_amp_mutations to apply a custom mutation confidence scoring system. 
 ## Application of thresholds to determine the confidence of each variant being a real mutation.
-## IT considers formalin-induced artifacts, which can falsely look like mutations.
+## It considers formalin-induced artifacts, which can falsely look like mutations.
+## It contains two example data frames in the input folder
 
 
 ## Summary of rules ----
@@ -146,9 +147,12 @@ call_tag_amp_mutations <- function(
 }
 
 # Calling function ----
+## For demonstration purpose it is using the example data provided in the input folder
 call_tag_amp_mutations(
-    input_filename = here::here("example_input.xlsx"),
-    output_prefix = "my_name",
+    input_filename = here::here("input/example_input_1.xlsx"), # replace with relative path of your file 
+    output_prefix = "my_name", #example only
     output_folder = here::here("output"),
     vaf_cutoff = 2 # VAF threshold can be changed. 2 is the default of the function.
 )
+
+## Optional: test with "example_input_2" as well (contain FATAL error for testing Safety check)
