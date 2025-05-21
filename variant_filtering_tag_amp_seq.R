@@ -99,7 +99,7 @@ assess_mutation <- function(single_row, vaf_cutoff = 2) { #single_row represents
 }
 
 # Define a reusable function that takes a data set as input (pre-processed data from variant calling) ----
-# This function uses the previous 'assess_mutation' function defined above
+# This wrapper function applies 'assess_mutation' function defined above
 call_tag_amp_mutations <- function(
     input_filename, #Change to input_filename = relative path of the input file you want to process
     output_prefix, #edit as needed to personalize output file names
@@ -150,5 +150,5 @@ call_tag_amp_mutations(
     input_filename = here::here("example_input.xlsx"),
     output_prefix = "my_name",
     output_folder = here::here("output"),
-    vaf_cutoff = 2 # VAF threshold can be changed. 2 is the deafult of the function.
+    vaf_cutoff = 2 # VAF threshold can be changed. 2 is the default of the function.
 )
